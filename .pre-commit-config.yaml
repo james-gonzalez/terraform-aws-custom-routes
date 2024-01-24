@@ -1,0 +1,38 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: ["--unsafe"]
+      - id: check-added-large-files
+      - id: no-commit-to-branch
+        args: ["--branch", "main"]
+      - id: check-executables-have-shebangs
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.86.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_docs
+      - id: tfupdate
+        name: Autoupdate AWS provider versions
+        args:
+          - --args=provider aws
+          - --args=--version 4.67.0
+      - id: tfupdate
+        name: Autoupdate Random provider versions
+        args:
+          - --args=provider random
+          - --args=--version 3.6.0
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        exclude: |
+          (?x)^(
+              README.md|
+              CHANGELOG.md
+          )$
