@@ -1,9 +1,6 @@
 name: Modules PR Workflow
 
-on:
-  pull_request:
-    paths:
-      - modules/**
+on: [pull_request]
 
 permissions:
   pull-requests: write
